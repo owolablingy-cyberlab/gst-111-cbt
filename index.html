@@ -45,14 +45,24 @@
             </form>
         </div>
 
-        <div id="results" class="hidden">
-            <div class="score-display">
-                <h2>Exam Completed!</h2>
-                <p>Your Score:</p>
-                <h1><span id="score">0</span> / <span id="total">0</span></h1>
-            </div>
-            <button onclick="location.reload()" class="course-card">Return to Home</button>
-        </div>
+  <div id="results" class="hidden">
+    <div class="score-display">
+        <h2>Exam Completed!</h2>
+        <p>Your Score:</p>
+        <h1><span id="score">0</span> / <span id="total">0</span></h1>
+    </div>
+    
+    <div class="result-buttons">
+        <button id="view-answer-btn" class="course-card" style="border-color: #6c757d; color: #6c757d;">
+            View Corrections
+        </button>
+        <button onclick="location.reload()" class="course-card">
+            Return to Home
+        </button>
+    </div>
+
+    <div id="review-container" class="hidden"></div>
+</div>
         
         <div class="watermark">Developed by Iyanuoluwa || criminology DEPT</div>
     </div>

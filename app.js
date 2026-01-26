@@ -453,4 +453,69 @@ if (quizForm) {
         quizForm.classList.add('hidden'); 
         window.scrollTo(0, 0);
     });
+}// Handle Form Submission
+if (quizForm) {
+    quizForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let score = 0;
+
+        // 1. Calculate Score
+        currentQuestions.forEach(q => {
+            const selected = document.querySelector(`input[name="question-${q.id}"]:checked`);
+            if (selected && selected.value === q.correct) {
+                score++;
+            }
+        });
+
+        // 2. Show Results Screen
+        document.getElementById('score').innerText = score;
+        document.getElementById('total').innerText = currentQuestions.length;
+        
+        resultDiv.classList.remove('hidden');
+        quizForm.classList.add('hidden'); 
+        window.scrollTo(0, 0);
+
+        // 3. Setup "View Corrections" Button
+        const viewBtn = document.getElementById('view-answer-btn');
+        const reviewContainer = document.getElementById('review-container');
+        
+        viewBtn.onclick = () => {
+            viewBtn.classList.add('hidden'); // Hide button after clicking
+            reviewContainer.classList.remove('hidden');
+            reviewContainer.innerHTML = '<h3>Test Corrections:</h3>'; // Reset title
+
+            currentQuestions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="question-${q.id}"]:checked`);
+                const userAnswer = selected ? selected.value : null;
+                
+                // Create Card for each question
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.innerHTML = `<h4>${index + 1}. ${q.text}</h4>`;
+
+                // Loop through options to show which was right/wrong
+                for (let key in q.options) {
+                    let optionClass = 'review-option';
+                    let icon = '';
+
+                    // Logic: Is this the correct answer?
+                    if (key === q.correct) {
+                        optionClass += ' correct-answer';
+                        icon = ' ✅';
+                    } 
+                    // Logic: Is this what the user picked (and was it wrong)?
+                    else if (key === userAnswer) {
+                        optionClass += ' wrong-answer';
+                        icon = ' ❌ (Your Choice)';
+                    }
+
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = optionClass;
+                    optionDiv.innerText = `${key.toUpperCase()}. ${q.options[key]} ${icon}`;
+                    card.appendChild(optionDiv);
+                }
+                reviewContainer.appendChild(card);
+            });
+        };
+    });
 }

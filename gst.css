@@ -124,7 +124,42 @@ header {
     cursor: pointer;
     margin-top: 20px;
 }
+/* Review Section Styling */
+.result-buttons {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 30px;
+}
 
+#review-container {
+    margin-top: 20px;
+    text-align: left;
+    border-top: 2px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.review-option {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+}
+
+/* Color Codes for Review */
+.correct-answer {
+    background-color: #d1e7dd; /* Light Green */
+    border-color: #badbcc;
+    color: #0f5132;
+    font-weight: bold;
+}
+
+.wrong-answer {
+    background-color: #f8d7da; /* Light Red */
+    border-color: #f5c6cb;
+    color: #842029;
+    text-decoration: line-through; /* Cross it out */
+}
 /* Utilities */
 .hidden { display: none; }
 .back-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; margin-bottom: 15px; }
